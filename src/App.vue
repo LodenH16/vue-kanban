@@ -11,14 +11,16 @@ export default defineComponent({
   },
   data() {
     return {
-      newColumn: '' as String,
+      newColumnName: '' as String,
+      newColumnColor: '' as String,
       columns: [] as Columns[]
     }
   },
   methods: {
     addColumn() {
       this.columns.push({
-        name: this.newColumn,
+        name: this.newColumnName,
+        color: this.newColumnColor,
         id: id++
       })
     }
@@ -27,7 +29,8 @@ export default defineComponent({
 </script>
 
 <template>
-  <input v-model="newColumn" @keyup.enter="addColumn">
+  <input v-model="newColumnName" @keyup.enter="addColumn">
+  <input v-model="newColumnColor" type="color">
   <button @click="addColumn">Add Column</button>
   <div class="boardWrapper">
     <KanbanColumn v-for="col in columns" :key="col.id" :col="col"/>
