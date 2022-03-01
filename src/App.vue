@@ -12,7 +12,7 @@ export default defineComponent({
   data() {
     return {
       newColumnName: '' as String,
-      newColumnColor: '' as String,
+      newColumnColor: '#DEDEDE' as String,
       columns: [] as Columns[]
     }
   },
@@ -30,7 +30,8 @@ export default defineComponent({
 
 <template>
   <input v-model="newColumnName" @keyup.enter="addColumn">
-  <input v-model="newColumnColor" type="color">
+  <label for="colorPicker">Choose background color</label>
+  <input v-model="newColumnColor" type="color" id="colorPicker">
   <button @click="addColumn">Add Column</button>
   <div class="boardWrapper">
     <KanbanColumn v-for="col in columns" :key="col.id" :col="col"/>
