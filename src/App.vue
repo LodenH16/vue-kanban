@@ -29,7 +29,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <input v-model="newColumnName" @keyup.enter="addColumn">
+  <input v-model="newColumnName" @keyup.enter="addColumn" placeholder="Name new Column">
   <label for="colorPicker">Choose background color</label>
   <input v-model="newColumnColor" type="color" id="colorPicker">
   <button @click="addColumn">Add Column</button>
