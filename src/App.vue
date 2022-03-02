@@ -23,6 +23,8 @@ export default defineComponent({
         color: this.newColumnColor,
         id: id++
       })
+      this.newColumnName = ""
+      this.newColumnColor = "#DEDEDE"
     }
   },
   })
