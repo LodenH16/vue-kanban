@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "vitest": "^0.5.8",
-    "vue": "^3.2.31"
+    "vue": "^3.2.31",
+    "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
     "@cypress/vite-dev-server": "^2.2.2",
