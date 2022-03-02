@@ -1,19 +1,25 @@
 <script lang="ts">
 import { defineComponent } from "vue";
+import Draggable from "vuedraggable"
 import KanbanColumn from "./components/KanbanColumn.vue"
 import type {Columns} from "./types"
 
-let id = 0
+
+let columnId = 0
+let dropZoneId = 1
 
 export default defineComponent({
   components: {
-    KanbanColumn
+    KanbanColumn,
+    Draggable
   },
   data() {
     return {
       newColumnName: '' as String,
       newColumnColor: '#DEDEDE' as String,
-      columns: [] as Columns[]
+      columns: [] as Columns[],
+      drag: false as boolean,
+      list: [1,2,3]
     }
   },
   methods: {
@@ -21,27 +27,40 @@ export default defineComponent({
       this.columns.push({
         name: this.newColumnName,
         color: this.newColumnColor,
-        id: id++
+        id: columnId++
       })
       this.newColumnName = ""
       this.newColumnColor = "#DEDEDE"
-    }
+    },
   },
   })
 </script>
 
-<template>
-  <input v-model="newColumnName" @keyup.enter="addColumn" placeholder="Name new Column">
-  <label for="colorPicker">Choose background color</label>
-  <input v-model="newColumnColor" type="color" id="colorPicker">
-  <button @click="addColumn">Add Column</button>
-  <div class="boardWrapper">
-    <KanbanColumn v-for="col in columns" :key="col.id" :col="col"/>
+<template >
+  <div class="headerWrapper">
+    <input v-model="newColumnName" @keyup.enter="addColumn" placeholder="Name new Column">
+    <label for="colorPicker">Choose background color</label>
+    <input v-model="newColumnColor" type="color" id="colorPicker">
+    <button @click="addColumn">Add Column</button>
   </div>
+  <Draggable
+    v-model="columns"
+    item-key="id"
+    class="boardWrapper"
+    >
+    <template #item="element">
+      <KanbanColumn :col="element.element" />
+    </template>
+  </Draggable> 
 </template>
 
 <style>
+  .headerWrapper {
+    width: 100%;
+  }
   .boardWrapper {
     display: flex;
+    width: 100%;
+    height: 100%;
   }
 </style>

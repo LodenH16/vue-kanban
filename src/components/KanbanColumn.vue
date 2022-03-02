@@ -20,16 +20,17 @@ export default defineComponent({
 
 <template>
     <div class="columnWrapper" :style="cssProps">
-        <span>{{col?.name}}</span>
+        <div>{{col?.name}}</div>
     </div>
 </template>
 
 <style>
     .columnWrapper {
-        background-color: var(--background-color-prop);
-        border-radius: 12px;
-        width: 300px;
+        width: 400px;
         height: 800px;
-        margin: 20px;
+        background-color: var(--background-color-prop);
+        margin: 0px 10px;
+        border-radius: 12px;
     }
+
 </style>
