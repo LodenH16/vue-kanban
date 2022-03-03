@@ -2,7 +2,10 @@ export interface Columns {
   name: String;
   color: String;
   id: number;
-  taskList: {
-    name: String;
-  }[];
+  taskList: Task[];
+}
+
+export interface Task {
+  name: String;
+  id: number;
 }

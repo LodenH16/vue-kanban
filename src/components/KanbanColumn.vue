@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Draggable from "vuedraggable"
-import type { Columns } from "../types"
+import type { Columns, Task } from "../types"
 
 export default defineComponent({
     components: {
@@ -22,8 +22,11 @@ export default defineComponent({
         cssProps(): Object {
             return {
                 "--background-color-prop": this.col?.color
-            } 
+            }
         },
+        updatedTaskList() {
+            return this.col!.taskList
+        }
     },
 })
 </script>
@@ -33,19 +36,22 @@ export default defineComponent({
         <div class="columnHeader handle">
             <div>{{col?.name}}</div>
             <button @click="$emit('removeColumn',col?.id)">X</button>
-            <input v-model="newTaskName"
+            <input v-model="newTaskName" placeholder="Name new"
             @keyup.enter="$emit('addNewTask', newTaskName, col?.id); newTaskName=''" />
             <button @click="$emit('addNewTask',newTaskName, col?.id); newTaskName=''" >
             Add Task
             </button>
         </div>
         <Draggable
-            item-key="`taskList${col.id}`"
-            :list="taskList"
+            itemKey="id"
+            :list="updatedTaskList"
             group="tasks"
             class="taskWrapper">
             <template #item="{element}">
-                <div class="taskCard">{{element.name}}</div>
+                <div class="taskCard" :key="`task${element.id}`">
+                    <div>{{element.name}}</div>
+                    <button @click="$emit('removeTask', col?.id, element.id)">X</button>
+                </div>
             </template>
         </Draggable>
     </div>

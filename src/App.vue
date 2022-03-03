@@ -5,8 +5,7 @@ import KanbanColumn from "./components/KanbanColumn.vue"
 import type {Columns} from "./types"
 
 
-let columnId = 0
-let dropZoneId = 1
+let taskId = 0
 
 export default defineComponent({
   components: {
@@ -19,8 +18,8 @@ export default defineComponent({
       newColumnColor: '#DEDEDE' as String,
       columns: [] as Columns[],
       drag: false as boolean,
-      columnId: 0 as Number,
-      taskId: 0 as Number
+      columnId: 0 as number,
+      taskId: 0 as number
     }
   },
   methods: {
@@ -38,7 +37,14 @@ export default defineComponent({
       this.columns = this.columns.filter(col => col.id !==  id)
     },
     addNewTask(taskName: String, columnId: Number) {
-      this.columns.find(obj => obj.id === columnId)?.taskList.push({name: taskName})
+      this.columns.find(obj => obj.id === columnId)?.taskList.push({
+        name: taskName,
+        id: this.taskId++,
+        })
+    },
+    removeTask(columnId: Number, taskId: Number) {
+      let columnTaskList = this.columns.find(col => col.id === columnId)!.taskList
+      this.columns.find(col => col.id === columnId)!.taskList = columnTaskList.filter(task => task.id !== taskId)
     }
   },
   })
@@ -53,13 +59,17 @@ export default defineComponent({
   </div>
   <Draggable
     :list="columns"
-    item-key="id"
+    itemKey="(elem) => elem.id"
     class="boardWrapper"
     handle=".handle"
     group="columns"
     >
     <template #item="element">
-      <KanbanColumn :col="element.element" @removeColumn="removeColumn" @addNewTask="addNewTask"/>
+      <KanbanColumn
+        :col="element.element"
+        @removeColumn="removeColumn"
+        @addNewTask="addNewTask"
+        @removeTask="removeTask"/>
     </template>
   </Draggable> 
 </template>
