@@ -49,6 +49,7 @@ export default defineComponent({
     v-model="columns"
     item-key="id"
     class="boardWrapper"
+    handle=".handle"
     >
     <template #item="element">
       <KanbanColumn :col="element.element" @removeColumn="removeColumn"/>

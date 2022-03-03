@@ -19,7 +19,7 @@ export default defineComponent({
 </script>
 
 <template>
-    <div class="columnWrapper" :style="cssProps">
+    <div class="columnWrapper handle" :style="cssProps">
         <div>{{col?.name}}</div>
         <button @click="$emit('removeColumn',col?.id)">X</button>
     </div>
