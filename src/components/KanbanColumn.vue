@@ -33,8 +33,11 @@ export default defineComponent({
         <div class="columnHeader handle">
             <div>{{col?.name}}</div>
             <button @click="$emit('removeColumn',col?.id)">X</button>
-            <input v-model="newTaskName" @keyup.enter="$emit('addNewTask', newTaskName, col?.id)" />
-            <button @click="$emit('addNewTask',newTaskName, col?.id)" >Add Task</button>
+            <input v-model="newTaskName"
+            @keyup.enter="$emit('addNewTask', newTaskName, col?.id); newTaskName=''" />
+            <button @click="$emit('addNewTask',newTaskName, col?.id); newTaskName=''" >
+            Add Task
+            </button>
         </div>
         <Draggable
             item-key="`taskList${col.id}`"
@@ -51,7 +54,6 @@ export default defineComponent({
 <style>
     .columnHeader {
         display: flex;
-        flex-wrap: wrap;
         width: 100%;
         height: 100px;
     }
