@@ -26,7 +26,8 @@ export default defineComponent({
       this.columns.push({
         name: this.newColumnName,
         color: this.newColumnColor,
-        id: columnId++
+        id: columnId++,
+        taskList: [1,2,3,4]
       })
       this.newColumnName = ""
       this.newColumnColor = "#DEDEDE"
@@ -50,6 +51,7 @@ export default defineComponent({
     item-key="id"
     class="boardWrapper"
     handle=".handle"
+    group="columns"
     >
     <template #item="element">
       <KanbanColumn :col="element.element" @removeColumn="removeColumn"/>
