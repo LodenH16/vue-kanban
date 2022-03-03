@@ -19,7 +19,6 @@ export default defineComponent({
       newColumnColor: '#DEDEDE' as String,
       columns: [] as Columns[],
       drag: false as boolean,
-      list: [1,2,3]
     }
   },
   methods: {
@@ -32,6 +31,9 @@ export default defineComponent({
       this.newColumnName = ""
       this.newColumnColor = "#DEDEDE"
     },
+    removeColumn(id: number) {
+      this.columns = this.columns.filter(col => col.id !==  id)
+    }
   },
   })
 </script>
@@ -49,7 +51,7 @@ export default defineComponent({
     class="boardWrapper"
     >
     <template #item="element">
-      <KanbanColumn :col="element.element" />
+      <KanbanColumn :col="element.element" @removeColumn="removeColumn"/>
     </template>
   </Draggable> 
 </template>
