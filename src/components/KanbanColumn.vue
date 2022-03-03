@@ -34,8 +34,8 @@ export default defineComponent({
             <div>{{col?.name}}</div>
             <button @click="$emit('removeColumn',col?.id)">X</button>
             <input v-model="newTaskName"
-            @keyup.enter="$emit('addNewTask', newTaskName, col?.id)" />
-            <button @click="$emit('addNewTask',newTaskName, col?.id)" >
+            @keyup.enter="$emit('addNewTask', newTaskName, col?.id); newTaskName=''" />
+            <button @click="$emit('addNewTask',newTaskName, col?.id); newTaskName=''" >
             Add Task
             </button>
         </div>
