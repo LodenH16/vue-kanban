@@ -50,7 +50,7 @@ export default defineComponent({
     <button @click="addColumn">Add Column</button>
   </div>
   <Draggable
-    v-model="columns"
+    :list="columns"
     item-key="id"
     class="boardWrapper"
     handle=".handle"

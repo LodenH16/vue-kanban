@@ -34,14 +34,14 @@ export default defineComponent({
             <div>{{col?.name}}</div>
             <button @click="$emit('removeColumn',col?.id)">X</button>
             <input v-model="newTaskName"
-            @keyup.enter="$emit('addNewTask', newTaskName, col?.id); newTaskName=''" />
-            <button @click="$emit('addNewTask',newTaskName, col?.id); newTaskName=''" >
+            @keyup.enter="$emit('addNewTask', newTaskName, col?.id)" />
+            <button @click="$emit('addNewTask',newTaskName, col?.id)" >
             Add Task
             </button>
         </div>
         <Draggable
             item-key="`taskList${col.id}`"
-            v-model="taskList"
+            :list="taskList"
             group="tasks"
             class="taskWrapper">
             <template #item="{element}">
