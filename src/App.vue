@@ -47,6 +47,20 @@ export default defineComponent({
       this.columns.find(col => col.id === columnId)!.taskList = columnTaskList.filter(task => task.id !== taskId)
     }
   },
+  watch: {
+    columns: {
+      handler(newValue, oldValue) {
+        window.localStorage.setItem("storedColumns", JSON.stringify(newValue))
+      },
+      deep: true
+    }
+  },
+  beforeMount () {
+    const columnsFromLocalStorage = JSON.parse(localStorage.getItem("storedColumns") || "[]")
+    if (Array.isArray(columnsFromLocalStorage)) {
+      this.columns = columnsFromLocalStorage
+    }
+  },
   })
 </script>
 
