@@ -27,7 +27,8 @@ export default defineComponent({
 
 <style>
     .columnWrapper {
-        width: 400px;
+        min-width: 300px;
+        max-width: 400px;
         height: 800px;
         background-color: var(--background-color-prop);
         margin: 0px 10px;
