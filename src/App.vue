@@ -27,13 +27,17 @@ export default defineComponent({
         name: this.newColumnName,
         color: this.newColumnColor,
         id: columnId++,
-        taskList: [1,2,3,4]
+        taskList: []
       })
       this.newColumnName = ""
       this.newColumnColor = "#DEDEDE"
     },
     removeColumn(id: number) {
       this.columns = this.columns.filter(col => col.id !==  id)
+    },
+    addNewTask(taskName: String, columnId: Number) {
+      console.log('adding task')
+      this.columns.find(obj => obj.id === columnId)?.taskList.push({name: taskName})
     }
   },
   })
@@ -54,7 +58,7 @@ export default defineComponent({
     group="columns"
     >
     <template #item="element">
-      <KanbanColumn :col="element.element" @removeColumn="removeColumn"/>
+      <KanbanColumn :col="element.element" @removeColumn="removeColumn" @addNewTask="addNewTask"/>
     </template>
   </Draggable> 
 </template>

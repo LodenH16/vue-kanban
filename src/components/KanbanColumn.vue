@@ -10,6 +10,7 @@ export default defineComponent({
     data() {
         return {
             taskList: this.col?.taskList,
+            newTaskName: ''
         }
     },
     props: {
@@ -32,10 +33,16 @@ export default defineComponent({
         <div class="columnHeader handle">
             <div>{{col?.name}}</div>
             <button @click="$emit('removeColumn',col?.id)">X</button>
+            <input v-model="newTaskName" @keyup.enter="$emit('addNewTask', newTaskName, col?.id)" />
+            <button @click="$emit('addNewTask',newTaskName, col?.id)" >Add Task</button>
         </div>
-        <Draggable item-key="`taskList${col.id}`" v-model="taskList" group="tasks">
+        <Draggable
+            item-key="`taskList${col.id}`"
+            v-model="taskList"
+            group="tasks"
+            class="taskWrapper">
             <template #item="{element}">
-                <div>{{element}}</div>
+                <div class="taskCard">{{element.name}}</div>
             </template>
         </Draggable>
     </div>
@@ -44,8 +51,13 @@ export default defineComponent({
 <style>
     .columnHeader {
         display: flex;
+        flex-wrap: wrap;
         width: 100%;
         height: 100px;
+    }
+    .taskWrapper {
+        width: 100%;
+        height: 100%;
     }
     .taskCard {
         width: 90%;
