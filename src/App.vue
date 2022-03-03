@@ -19,6 +19,8 @@ export default defineComponent({
       newColumnColor: '#DEDEDE' as String,
       columns: [] as Columns[],
       drag: false as boolean,
+      columnId: 0 as Number,
+      taskId: 0 as Number
     }
   },
   methods: {
@@ -26,7 +28,7 @@ export default defineComponent({
       this.columns.push({
         name: this.newColumnName,
         color: this.newColumnColor,
-        id: columnId++,
+        id: this.columnId++,
         taskList: []
       })
       this.newColumnName = ""
