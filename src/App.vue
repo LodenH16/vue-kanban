@@ -36,7 +36,6 @@ export default defineComponent({
       this.columns = this.columns.filter(col => col.id !==  id)
     },
     addNewTask(taskName: String, columnId: Number) {
-      console.log('adding task')
       this.columns.find(obj => obj.id === columnId)?.taskList.push({name: taskName})
     }
   },
