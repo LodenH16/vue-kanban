@@ -34,13 +34,17 @@ export default defineComponent({
 <template>
     <div class="columnWrapper" :style="cssProps">
         <div class="columnHeader handle">
-            <div>{{col?.name}}</div>
-            <button @click="$emit('removeColumn',col?.id)">X</button>
-            <input v-model="newTaskName" placeholder="Name new"
-            @keyup.enter="$emit('addNewTask', newTaskName, col?.id); newTaskName=''" />
-            <button @click="$emit('addNewTask',newTaskName, col?.id); newTaskName=''" >
-            Add Task
-            </button>
+            <div class="colHeaderLine">
+                <div>{{col?.name}}</div>
+                <button id="deleteColumnBtn" @click="$emit('removeColumn',col?.id)">X</button>
+            </div>
+            <div class="colHeaderLine">
+                <input v-model="newTaskName" placeholder="Name new Task"
+                @keyup.enter="$emit('addNewTask', newTaskName, col?.id); newTaskName=''" />
+                <button @click="$emit('addNewTask',newTaskName, col?.id); newTaskName=''" >
+                Add Task
+                </button>
+            </div>
         </div>
         <Draggable
             itemKey="id"
@@ -60,8 +64,16 @@ export default defineComponent({
 <style>
     .columnHeader {
         display: flex;
+        flex-wrap: wrap;
         width: 100%;
         height: 100px;
+        border-bottom: solid black 1px;
+    }
+    .colHeaderLine {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
     }
     .taskWrapper {
         width: 100%;
