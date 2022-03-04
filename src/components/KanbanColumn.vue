@@ -81,9 +81,17 @@ export default defineComponent({
     }
     .taskCard {
         width: 90%;
-        height: 100px;
-        background-color: navajowhite;
-        margin: 5px auto;
+        height: auto;
+        background-color: whitesmoke;
+        margin: 10px auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        overflow-wrap: break-word;
+        word-break: break-all;
+        border-radius: 10px;
+        border: 1px solid black;
     }
     .columnWrapper {
         display: flex;
