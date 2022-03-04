@@ -53,6 +53,12 @@ export default defineComponent({
         window.localStorage.setItem("storedColumns", JSON.stringify(newValue))
       },
       deep: true
+    },
+    columnId(value) {
+      window.localStorage.setItem("storedColumnId", JSON.stringify(value))
+    },
+    taskId(value) {
+      window.localStorage.setItem("storedTaskId", JSON.stringify(value))
     }
   },
   beforeMount () {
@@ -60,6 +66,8 @@ export default defineComponent({
     if (Array.isArray(columnsFromLocalStorage)) {
       this.columns = columnsFromLocalStorage
     }
+    this.columnId = JSON.parse(localStorage.getItem("storedColumnId") || "0")
+    this.taskId = JSON.parse(localStorage.getItem("storedTaskId") || "0")
   },
   })
 </script>
